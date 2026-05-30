@@ -4,12 +4,9 @@ pipeline {
     options {
         ansiColor('xterm')
     }
-
+    agent { label 'docker-host' }
     stages {
         stage('build') {
-            agent {
-                { label 'docker-host' }
-            }
             steps {
                 sh 'docker run --rm node:22-alpine'
                 sh 'npm ci'
