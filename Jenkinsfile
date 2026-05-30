@@ -4,11 +4,15 @@ pipeline {
     options {
         ansiColor('xterm')
     }
-    agent { label 'docker-host' }
+
     stages {
         stage('build') {
+            agent {
+                docker {
+                    image 'node:22-alpine'
+                }
+            }
             steps {
-                sh 'docker run --rm node:22-alpine'
                 sh 'npm ci'
                 sh 'npm run build'
             }
