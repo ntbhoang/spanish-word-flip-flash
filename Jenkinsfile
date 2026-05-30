@@ -7,14 +7,11 @@ pipeline {
 
     stages {
         stage('build') {
-            agent { label 'docker host' }
-            stage('Build') {
-                steps {
-                    sh 'docker run --rm node:22-alpine'
-                
-            }
+            agent {
+                { label 'docker-host' }
             }
             steps {
+                sh 'docker run --rm node:22-alpine'
                 sh 'npm ci'
                 sh 'npm run build'
             }
